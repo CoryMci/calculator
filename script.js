@@ -53,6 +53,10 @@ function clear() {
 }
 
 function refresh(strNum) {
+    strNum = strNum.toString();
+    if (strNum.length > 10) {
+        strNum = strNum.substring(0,10);
+    }
     document.querySelector('.screen').textContent = strNum
 }
 
