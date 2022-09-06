@@ -1,17 +1,17 @@
 function add(a, b) {
-    return a + b;
+    return parseInt(a) + parseInt(b);
 }
 
 function subtract(a, b) {
-    return a - b;
+    return parseInt(a) - parseInt(b);
 }
 
 function multiply(a, b) {
-    return a * b;
+    return parseInt(a) * parseInt(b);
 }
 
 function divide(a, b) {
-    return a / b;
+    return parseInt(a) / parseInt(b);
 }
 
 function operate(target) { //logs operator pressed and first operand, then resets current number.
@@ -20,6 +20,36 @@ function operate(target) { //logs operator pressed and first operand, then reset
     firstOperand = screenNum;
     screenNum = " 0";
     console.log(firstOperand);
+}
+
+function equals() { //logs current number on screen as second operand, applies operation
+    secondOperand = screenNum;
+    if (operatorPressed == 'add'){
+        console.log('add');
+        screenNum = add(firstOperand, secondOperand);
+    } else if (operatorPressed == 'subtract') {
+        console.log('subtract');
+        screenNum = subtract(firstOperand, secondOperand);
+    } else if (operatorPressed == 'multiply') {
+        console.log('multiply');
+        screenNum = multiply(firstOperand, secondOperand);
+    } else if (operatorPressed == 'divide') {
+        console.log('divide');
+        screenNum = divide(firstOperand, secondOperand);
+    }
+    refresh(screenNum);
+    console.log("first: " + firstOperand); //debug
+    console.log("second: " + secondOperand); //debug
+    operatorPressed = "none";
+    firstOperand = screenNum;
+}
+
+function clear() {
+    screenNum = " 0";
+    operatorPressed = "none"
+    firstOperand = screenNum;
+    secondOperand = screenNum;
+    refresh(screenNum);
 }
 
 function refresh(strNum) {
@@ -39,6 +69,7 @@ function digit(target) {
 let screenNum = " 0";
 let operatorPressed = "none"
 let firstOperand = screenNum;
+let secondOperand = screenNum;
 
 let buttons = document.querySelectorAll('button'); //supplies functions to buttons
 buttons.forEach(button => {
@@ -47,20 +78,20 @@ buttons.forEach(button => {
         let classes = e.target.classList;
         console.log(classes);
         if (classes.contains('num')){
-            console.log('debug: num pressed!');
+            console.log('debug: num pressed!'); //debug
             digit(classes)
         } else if (classes.contains('op')){
-            console.log('debug: op pressed!');
+            console.log('debug: op pressed!'); //debug
             operate(classes);
         } else if (classes.contains('equals')){
-            console.log('debug: = pressed!');
+            console.log('debug: = pressed!'); //debug
+            equals();
         } else if (classes.contains('clear')){
-            console.log('debug: clear pressed!');
+            console.log('debug: clear pressed!'); //debug
+            clear();
         } else {
-            console.log('debug: error, unkown class');
-            console.log(classes);
+            console.log('debug: error, unkown class'); //debug
+            console.log(classes); //debug
         }
     })
 })
-
-console.log('yo');
