@@ -15,6 +15,9 @@ function divide(a, b) {
 }
 
 function operate(target) { //logs operator pressed and first operand, then resets current number.
+    if (operatorPressed != "none"){
+        equals();
+    }
     operatorPressed = target.item(1);
     console.log(operatorPressed);
     firstOperand = screenNum;
